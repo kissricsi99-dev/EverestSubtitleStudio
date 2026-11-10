@@ -1,0 +1,24 @@
+name: Build Windows EXE
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Build EXE
+        run: pyinstaller --noconfirm --clean --windowed --name EverestSubtitleStudio --collect-all faster_whisper --collect-all ctranslate2 --collect-all av --collect-all tokenizers main.py
+      - name: Upload EXE folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: EverestSubtitleStudio-Windows
+          path: dist/EverestSubtitleStudio/
