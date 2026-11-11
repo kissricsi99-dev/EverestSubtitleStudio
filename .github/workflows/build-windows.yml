@@ -16,7 +16,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Build EXE
-        run: pyinstaller --noconfirm --clean --windowed --name EverestSubtitleStudio --collect-all faster_whisper --collect-all ctranslate2 --collect-all av --collect-all tokenizers main.py
+        run: pyinstaller --noconfirm --clean --windowed --name EverestSubtitleStudio --collect-all numpy --collect-all faster_whisper --collect-all ctranslate2 --collect-all av --collect-all tokenizers --collect-all requests --collect-all certifi --collect-all charset_normalizer --collect-all idna --collect-all urllib3 main.py
       - name: Upload EXE folder
         uses: actions/upload-artifact@v4
         with:
